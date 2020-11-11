@@ -15,19 +15,18 @@ bool isEven(int value) { return value % 2 == 0; }
 void resolver(vector<int> &v) {
 
     int offset = 0;
-
     int i = 0;
+
     while(i < v.size()) {
         
         bool even        = isEven(v[i]);
         bool offset_even = isEven(offset);
         bool offset_value_even = isEven(v[offset]);
 
-
         if (offset_even != offset_value_even) {
 
             if (even == offset_even) {
-                v[offset] = v[i];
+                swap(v[offset], v[i]);
                 offset++;
             }
             else {
@@ -42,9 +41,7 @@ void resolver(vector<int> &v) {
 
     }
 
-    int diff = offset % 2;
-
-    v.resize(offset - diff);
+    v.resize(offset - (offset % 2) );
 
 }
 
@@ -67,7 +64,8 @@ bool resuelveCaso() {
     resolver(v);
 
     for (size_t i = 0; i < v.size(); ++i){
-        cout << v[i] << " ";
+        cout << v[i];
+        if (i != v.size() - 1) cout << " ";
     }
 
     cout << endl;
