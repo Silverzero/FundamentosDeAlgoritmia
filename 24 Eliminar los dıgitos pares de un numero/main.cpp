@@ -1,0 +1,69 @@
+﻿// Marco Desantes Gutiérrez
+// E15
+
+
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+
+
+using namespace std;
+
+// función que resuelve el problema
+long long int resolver(long long int& number) {
+    if (number != 0) {
+
+        long long int value = number / 10;
+        int resto = number % 10;
+
+        if (resto % 2 == 0) {
+            return resolver(value);
+        }
+        else {
+            return resolver(value) * 10 + resto;
+        }
+    }
+    else {
+        return number;
+    }
+}
+
+// Resuelve un caso de prueba, leyendo de la entrada la
+// configuración, y escribiendo la respuesta
+bool resuelveCaso() {
+    // leer los datos de la entrada
+    long long int number;
+    
+    cin >> number;
+    if (!cin)
+        return false;
+
+    long long int sol = resolver(number);
+
+    // escribir sol
+    cout << sol << endl;
+
+    return true;
+
+}
+
+int main() {
+    // Para la entrada por fichero.
+    // Comentar para acepta el reto
+#ifndef DOMJUDGE
+    ifstream in("datos.txt");
+    auto cinbuf = cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
+#endif 
+
+
+    while (resuelveCaso())
+        ;
+
+
+    // Para restablecer entrada. Comentar para acepta el reto
+#ifndef DOMJUDGE // para dejar todo como estaba al principio
+    cin.rdbuf(cinbuf);
+#endif
+
+    return 0;
+}
