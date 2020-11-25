@@ -10,14 +10,16 @@
 using namespace std;
 
 // función que resuelve el problema
-void resolver(long long int &number, int &sol) {
+int resolver(long long int number) {
 
-    long long int val = number / 10;
-    if (val > 0) {
-        resolver(val, ++sol);
+    long long int aux_number = number / 10;
+    int resto = number % 10;
+    if (aux_number > 0) {
+        return 1 + resolver(aux_number);
     }
-    else
-        ++sol;
+    else {
+        return 1;
+    }
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
@@ -31,8 +33,7 @@ bool resuelveCaso() {
     if (!cin)
         return false;
 
-    int sol = 0;
-    resolver(number, sol);
+    int sol = resolver(number);
 
     // escribir sol
     cout << sol << endl;

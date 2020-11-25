@@ -1,51 +1,51 @@
 ﻿// Marco Desantes Gutiérrez
 // E15
 
-
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-
 
 using namespace std;
 
 // función que resuelve el problema
 long long int resolver(long long int number) {
-    
+
     if (number > 0) {
 
-        long long int value = number / 10;
+        long long int aux_number = number / 10;
         int resto = number % 10;
 
-        if (resto % 2 == 0) {
-            return resolver(value);
-        }
-        else {
-            return resolver(value) * 10 + resto;
-        }
+        return resolver(aux_number) * 100  + resto * 10 + resto;
+
     }
-    else {
-        return number;
+    else return 0;
+
+}
+
+long long int resolver_inverso(long long int number, long long int new_number, int n) {
+
+    if (number > 0) {
+        long long int aux_number = number / 10;
+        int resto = number % 10;
+        long long int value = (((resto * 10) + resto) * n) + new_number;
+        return resolver_inverso(aux_number, value, n * 100);
     }
+    else return new_number;
+
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
-bool resuelveCaso() {
+void resuelveCaso() {
     // leer los datos de la entrada
     long long int number;
-    
+
     cin >> number;
-    if (!cin)
-        return false;
 
     long long int sol = resolver(number);
-
+    long long int sol_inv = resolver_inverso(number, 0, 1);
     // escribir sol
-    cout << sol << endl;
-
-    return true;
-
+    cout << sol << " " << sol_inv << endl;
 }
 
 int main() {
@@ -57,8 +57,10 @@ int main() {
 #endif 
 
 
-    while (resuelveCaso())
-        ;
+    int numCasos;
+    cin >> numCasos;
+    for (int i = 0; i < numCasos; ++i)
+        resuelveCaso();
 
 
     // Para restablecer entrada. Comentar para acepta el reto

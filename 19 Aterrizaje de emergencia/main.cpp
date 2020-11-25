@@ -1,48 +1,51 @@
 ﻿// Marco Desantes Gutiérrez
 // E15
 
-
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-
+#include <vector>
 
 using namespace std;
 
+int plain();
+
 // función que resuelve el problema
-long long int resolver(long long int number) {
-    
-    if (number > 0) {
+vector<int> resolver(vector<int> const &v, int const &offset) {
 
-        long long int value = number / 10;
-        int resto = number % 10;
+    vector<int> sol;
 
-        if (resto % 2 == 0) {
-            return resolver(value);
-        }
-        else {
-            return resolver(value) * 10 + resto;
-        }
-    }
-    else {
-        return number;
-    }
+    return sol;
+
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
 bool resuelveCaso() {
     // leer los datos de la entrada
-    long long int number;
-    
-    cin >> number;
-    if (!cin)
+    int size, offset;
+
+    cin >> size >> offset;
+    if (size == 0 && offset == 0)
         return false;
 
-    long long int sol = resolver(number);
+    vector<int> v(size);
+    for (int& x : v) cin >> x;
+
+    vector<int> sol = resolver(v, offset);
 
     // escribir sol
-    cout << sol << endl;
+    cout << sol.size();
+    
+    if (sol.size() == 0)
+        cout << endl;
+    else {
+        for (int const& x : v) {
+            cout << " " << x;
+        }
+        cout << endl;
+    }
+        
 
     return true;
 

@@ -9,19 +9,19 @@
 using namespace std;
 
 // función que resuelve el problema
-int suma(int& number) {
+int suma(int number) {
 
     int aux_number = number / 10;
-    int resto     = number % 10;
+    int resto      = number % 10;
     
-    if (aux_number != 0) {
+    if (aux_number > 0) {
         return resto + suma(aux_number);
     }
     else
         return resto;
 }
 
-bool resolver(int &number, int &suma_izq, int &suma_der) {
+bool resolver(int number, int suma_izq, int suma_der) {
 
     int aux_number = number / 10;
     int resto      = number % 10;

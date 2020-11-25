@@ -10,10 +10,10 @@
 using namespace std;
 
 // función que resuelve el problema
-unsigned long long int resolver(unsigned int const& number, vector<unsigned long long int>& v) {
+unsigned long long int resolver(unsigned int number, vector<unsigned long long int>& v) {
 
      if (v[number] == 0 && number != 0){
-            v[number] = resolver(number - 1, v) + resolver(number - 2, v);
+         v[number] = resolver(number - 1, v) + resolver(number - 2, v);
      }
 
      return v[number];
