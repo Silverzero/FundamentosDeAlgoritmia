@@ -14,6 +14,27 @@ int plain();
 vector<int> resolver(vector<int> const &v, int const &offset) {
 
     vector<int> sol;
+    
+    int start     = 0;
+    int last      = -1;
+    int end       = 0;
+    int end_value = v[0];
+
+    for (int i = 1; i < v.size(); ++i) {
+        
+        if (abs(v[i] - end_value) <= 1) {
+            end = i;
+            end_value = v[i];
+            if ((end - start + 1) >= offset && start != last){
+                sol.push_back(start);
+                last = start;
+            }
+        }
+        else {
+            end_value = v[i];
+            start = i;
+        }
+    }
 
     return sol;
 
@@ -37,15 +58,12 @@ bool resuelveCaso() {
     // escribir sol
     cout << sol.size();
     
-    if (sol.size() == 0)
-        cout << endl;
-    else {
-        for (int const& x : v) {
+    if (sol.size() != 0){
+        for (int const& x : sol) {
             cout << " " << x;
         }
-        cout << endl;
     }
-        
+    cout << endl;
 
     return true;
 
