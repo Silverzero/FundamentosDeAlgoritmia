@@ -13,17 +13,13 @@ int resolver(long long int number, int digit) {
 
     long long int aux_number = number / 10;
     int resto = number % 10;
-
+    
     if (number > 0) {
         if (resto == digit)
             return 1 + resolver(aux_number, digit);
         else
             return resolver(aux_number, digit);
-    }
-    else {
-        return 0;
-    }
-
+    } else return 0;
 }
 
 int resolver_inverso(long long int number, int digit, int times) {
@@ -33,14 +29,10 @@ int resolver_inverso(long long int number, int digit, int times) {
 
     if (number > 0) {
         if (resto == digit)
-            return resolver_inverso(aux_number, digit, times + 1);
+            return resolver_inverso(aux_number, digit, 1 + times);
         else
             return resolver_inverso(aux_number, digit, times);
-    }
-    else {
-        return times;
-    }
-
+    } else return times;
 }
 
 // Resuelve un caso de prueba, leyendo de la entrada la
