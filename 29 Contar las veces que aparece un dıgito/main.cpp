@@ -44,10 +44,19 @@ void resuelveCaso() {
 
     cin >> number >> digit;
 
-    int sol = resolver(number, digit);
-    int sol_inv = resolver_inverso(number, digit, 0);
+    int sol = 0, sol_inv = 0;
+
+    if (number == 0 && digit == 0) {
+        sol = 1;
+        sol_inv = 1;
+    }
+    else {
+        sol = resolver(number, digit);
+        sol_inv = resolver_inverso(number, digit, 0);
+    }
     // escribir sol
     cout << sol << " " << sol_inv << endl;
+
 }
 
 int main() {

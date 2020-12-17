@@ -15,20 +15,20 @@ struct solution {
 };
 
 // función que resuelve el problema
-solution resolver(vector<int> v, int left, int right) {
+solution resolver(const vector<int> &v, int left, int right, int rows) {
 
-    if (left == right){ // un elemento
+    if (left > right) {       //vector vacio
+        return { true, 0 };
+    }else if (left == right){ // un elemento
         return { true, v[left] };
-    }
-    else if (left + 1 == right) { // 2 elementos
+    }else if (left + 1 == right) { // 2 elementos
         return { v[left] < v[right], v[left] + v[right] };
-    }
-    else {
+    }else {
         
         int middle = (left + right) / 2;
 
-        solution l = resolver(v, left, middle);
-        solution r = resolver(v, middle + 1, right);
+        solution l = resolver(v, left, middle, rows);
+        solution r = resolver(v, middle + 1, right, rows);
 
         return { l.ok && r.ok && l.total < r.total, l.total + r.total };
 
@@ -59,7 +59,7 @@ bool resuelveCaso() {
     
     // escribir sol
     for (size_t i = 0; i < m.size() && sol; ++i)
-        sol = resolver(m[i], 0, m[i].size() - 1).ok;
+        sol = resolver(m[i], 0, col - 1, row).ok;
 
     cout << (sol ? "SI" : "NO") << std::endl;
 
